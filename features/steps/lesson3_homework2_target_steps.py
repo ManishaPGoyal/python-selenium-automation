@@ -21,7 +21,7 @@ def verify_cart_empty(context):
      # verification $x("//div[@data-test='boxEmptyMsg']")
     actual_result = context.driver.find_element(By.XPATH,"//div[@data-test='boxEmptyMsg']" ).text
     expected_result = 'Your cart is empty'
-    assert expected_result in actual_result, f'Expected {expected_result} but got {actual_result}'
+    assert expected_result == actual_result, f'Expected {expected_result} but got {actual_result}'
 
 #part2
 @when('Click on Sign In')
