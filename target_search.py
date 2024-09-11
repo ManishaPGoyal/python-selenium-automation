@@ -25,7 +25,7 @@ driver.find_element(By.ID,'search').send_keys('tea')
 driver.find_element(By.XPATH,"//button[@data-test='@web/Search/SearchButton']").click()
 
 #when you run first time this code as target website is slow and selenium is fast so test will fail . so put sleep(6) to slow down the execution of the code
-sleep(6)
+sleep(6) ##wait for page to load
 #Verification  $x("//div[@data-test='resultsHeading']")
 actual_result=driver.find_element(By.XPATH,"//div[@data-test='resultsHeading']").text
 expected_result='tea'
