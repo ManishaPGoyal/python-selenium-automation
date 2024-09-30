@@ -49,7 +49,11 @@ Scenario: Verify Target circle page has correct amount of benefits cells
 Scenario: User can add Target product in cart and check it's in cart
     # Enter steps here
    Given Open the target main page
-   When  Search the Target product to Add to cart
+   #When  Search the Target product to Add to cart
+   When Search for the mug
+   And Click on Add to Cart Button
+   And Store product name
+   And Confirm Add to Cart button from side navigation
    Then Verify that cart has that product
 
  #part 4

@@ -29,7 +29,26 @@ def search_for_product(context,product):
     #console command $x("//input[@id='search']")
     context.driver.find_element(By.ID, 'search').send_keys(product)
     context.driver.find_element(By.XPATH, "//button[@data-test='@web/Search/SearchButton']").click()
-sleep(5)
+    sleep(5)
+
+#part3 corrected
+@when('Click on Add to Cart Button')
+def click_add_to_cart(context):
+    #$$("[id*='addToCartButton']")
+    context.driver.find_element(By.CSS_SELECTOR, "[id*='addToCartButton']").click()
+    sleep(5)
+
+@when('Store product name')
+def store_product_name(context):
+    context.product_name = context.driver.find_element(By.CSS_SELECTOR, "[data-test='content-wrapper'] h4").text
+    print(f'Product stored: {context.product_name}')
+    sleep(5)
+
+
+@when('Confirm Add to Cart button from side navigation')
+def side_nav_click_add_to_cart(context):
+    context.driver.find_element(By.CSS_SELECTOR, "[data-test='content-wrapper'] [id*='addToCart']").click()
+    sleep(5)
 
 
 #part1
@@ -64,25 +83,30 @@ def search_for_benefits(context):
 # cart page url https://www.target.com/cart
 # cart summary box  $$("[data-test*='cart-summary']")
 #cart total $$("[data-test='cart-summary-total']")
-@when('Search the Target product to Add to cart')
-def search_the_product(context):
-    context.driver.find_element(By.ID, 'search').send_keys('arizona tea')
-    context.driver.find_element(By.XPATH, "//button[@data-test='@web/Search/SearchButton']").click()
-    sleep(5)
-    #context.driver.find_element(By.CSS_SELECTOR,"[href='/p/arizona-arnold-palmer-lite-half-iced-tea-half-lemonade-128-fl-oz-jug/-/A-13388793#lnk=sametab']")
-    context.driver.find_element(By.CSS_SELECTOR,"[class*='fLytdP bRxnjG h-display-block h-text-bold h-text-bs'][aria-label='AriZona Arnold Palmer Lite Half Iced Tea & Half Lemonade - 128 fl oz Jug']")
-    sleep(5)
-    context.driver.find_element(By.CSS_SELECTOR, "button[id='addToCartButtonOrTextIdFor13388793']").click()
-    sleep(5)
-    context.driver.find_element(By.CSS_SELECTOR,"a[class*='jKTcnK hhYRAp']").click()
-    sleep(5)
-    context.driver.get("https://www.target.com/cart")
-    sleep(5)
+
+## @when('Search the Target product to Add to cart')
+## def search_the_product(context):
+##    context.driver.find_element(By.ID, 'search').send_keys('arizona tea')
+##     context.driver.find_element(By.XPATH, "//button[@data-test='@web/Search/SearchButton']").click()
+##    sleep(5)
+##    #context.driver.find_element(By.CSS_SELECTOR,"[href='/p/arizona-arnold-palmer-lite-half-iced-tea-half-lemonade-128-fl-oz-jug/-/A-13388793#lnk=sametab']")
+##    context.driver.find_element(By.CSS_SELECTOR,"[class*='fLytdP bRxnjG h-display-block h-text-bold h-text-bs'][aria-label='AriZona Arnold Palmer Lite Half Iced Tea & Half Lemonade - 128 fl oz Jug']")
+##     sleep(5)
+##     context.driver.find_element(By.CSS_SELECTOR, "[id*='addToCartButton']").click()
+##     sleep(5)
+##     context.driver.find_element(By.CSS_SELECTOR,"[class*='hYRAp'][href='/cart']").click()
+##     sleep(5)
+##    #context.driver.get("https://www.target.com/cart")
+##    #sleep(5)
+
 
 
 @then('Verify that cart has that product')
 def verify_cart(context):
-    context.driver.find_element(By.CSS_SELECTOR,"[data-test='cart-summary-total']")
+    #actual_name= context.driver.find_element(By.CSS_SELECTOR,"[data-test='cart-summary-total']")
+    actual_name = context.driver.find_element(By.CSS_SELECTOR, "[data-test='cartItem-title']").text
+    print(f'Actual product in cart name:{actual_name}')
+    assert context.product_name in actual_name,f"Expected{context.product_name} but got {actual_name}"
     sleep(5)
 
 
