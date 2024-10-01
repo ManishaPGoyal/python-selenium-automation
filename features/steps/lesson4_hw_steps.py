@@ -2,7 +2,7 @@ from behave.model import Scenario
 from  selenium.webdriver.common.by import By
 from behave import given, when, then
 from time import sleep
-
+from selenium.webdriver.support import expected_conditions as EC
 
 
 #part1
@@ -28,15 +28,22 @@ sleep(5)
 def search_for_product(context,product):
     #console command $x("//input[@id='search']")
     context.driver.find_element(By.ID, 'search').send_keys(product)
-    context.driver.find_element(By.XPATH, "//button[@data-test='@web/Search/SearchButton']").click()
-    sleep(5)
+    # USED EXPLICIT WAIT
+    context.driver.wait.until(EC.visibility_of_element_located((By.XPATH, "//button[@data-test='@web/Search/SearchButton']"))
+                              ,message='search button not clickable').click()
+
+    #context.driver.find_element(By.XPATH, "//button[@data-test='@web/Search/SearchButton']").click()
+    #sleep(5)
 
 #part3 corrected
 @when('Click on Add to Cart Button')
 def click_add_to_cart(context):
     #$$("[id*='addToCartButton']")
-    context.driver.find_element(By.CSS_SELECTOR, "[id*='addToCartButton']").click()
-    sleep(5)
+    #USED EXPLICIT WAIT
+    context.deriver.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "[id*='addToCartButton']")),
+                               message='add to cart button not clickable').click()
+    #context.driver.find_element(By.CSS_SELECTOR, "[id*='addToCartButton']").click()
+    #sleep(5)
 
 @when('Store product name')
 def store_product_name(context):
