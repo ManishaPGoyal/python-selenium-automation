@@ -29,15 +29,7 @@ Feature: Tests for Target Search functionality
    When  Search for coffee
    Then  Verify that correct search result shown for coffee
 
-
-    Scenario: User can search for tea
-    # Enter steps here
-   Given Open target main page
-   When  Search for tea
-   Then  Verify that correct search result shown for tea
-
-
-    Scenario: User can search for christmas light
+ Scenario: User can search for christmas light
     # Enter steps here
    Given Open target main page
    When  Search for chirstmas light
@@ -85,3 +77,17 @@ Scenario: Verify header is shown
 #  Then Verify header has 6 links
 
  # we just want to verify header is shown , not wnat to count the link
+
+  # LESSON 6 HOMEWORK
+ #PART1
+Scenario: User can search for tea
+    # Enter steps here
+   Given Open target main page
+   When  Search the product tea
+   Then  Verify that the correct search result shown for tea
+
+#PART2
+Scenario: User can see empty cart message
+    Given Open target main page
+    When  Click on the cart icon
+    Then  Verify that "Your cart is empty" message is shown

@@ -10,6 +10,10 @@ from time import sleep
 #     context.driver.get("https://www.target.com/")
 # give 2 lines after this to start with when
 sleep(5)
+
+#lesson 6 to use page object , comment above given
+
+
 @when('Search for a product')
 def search_product(context):
     # Search filed =>tea
@@ -18,6 +22,7 @@ def search_product(context):
     # command type on console $x("//button[@data-test='@web/Search/SearchButton']")
     context.driver.find_element(By.XPATH, "//button[@data-test='@web/Search/SearchButton']").click()
     sleep(5)
+
 
 @when('Search for product222')
 def search_product(context):
@@ -28,6 +33,9 @@ def search_product(context):
     context.driver.find_element(By.XPATH, "//button[@data-test='@web/Search/SearchButton']").click()
     sleep(5)
 
+
+
+
 @then('Verify that correct search result show')
 def verify_result(context):
     # Verification  $x("//div[@data-test='resultsHeading']")
@@ -36,7 +44,7 @@ def verify_result(context):
     assert expected_result in actual_result, f'Expected {expected_result} but got {actual_result}'
     # print('Test case passed') we dont need this command as behave will handle this
 
- # this will showing the concept of parameter 09/11/24 we made dynamic
+#  # this following will showing the concept of parameter 09/11/24 we made dynamic
 @when('Search for {item}')
 def search_product(context,item):
     print(item)
@@ -47,12 +55,14 @@ def search_product(context,item):
     context.driver.find_element(By.XPATH, "//button[@data-test='@web/Search/SearchButton']").click()
     sleep(5)
 
+
 @then('Verify that correct search result shown for {product}')
 def verify_result1(context,product):
     # Verification  $x("//div[@data-test='resultsHeading']")
     actual_result = context.driver.find_element(By.XPATH, "//div[@data-test='resultsHeading']").text
     #expected_result = product
     assert product in actual_result, f'Expected {product} but got {actual_result}'
+
 #one way
 @then('Verify header has 6 links')
 def verify_header_link(context):
@@ -60,6 +70,9 @@ def verify_header_link(context):
     print(links)
     len(links)
     assert len(links)==6,f'Expected 6 links but got {len(links)}'
+
+
+
 
 #another way by using variable
 ## used the above then using variable so commented the above
@@ -99,3 +112,40 @@ def verify_header_link_shown(context):
     #below staement will make this test fail if nothing matches so be careful to add this stament or count links so you know that
     #find elements witll give you correct result, add below command to see test fails
     #assert len(link)>0
+
+#lesson 6 part1
+@given('Open target main page')
+def open_main_page(context):
+    context.app.main_page.open_page()
+sleep(5)
+
+
+@when('Search the product {item}')
+def search_product(context,item):
+    print(item)
+    context.app.header.search_product(item)
+    sleep(5)
+
+
+@then('Verify that the correct search result shown for {product}')
+def verify_result1(context,product):
+    context.app.search_result_page.verify_result(product)
+    sleep(5)
+
+
+
+#lesson 6 part2
+@when('Click on the cart icon')
+def click_cart(context):
+    context.app.header.click_cart_icon()
+sleep(5)
+
+
+@then('Verify that "Your cart is empty" message is shown')
+def verify_cart_empty(context):
+    # verification $x("//div[@data-test='boxEmptyMsg']")
+    # actual_result = context.driver.find_element(By.XPATH,"//div[@data-test='boxEmptyMsg']" ).text
+    # expected_result = 'Your cart is empty'
+    # assert expected_result == actual_result, f'Expected {expected_result} but got {actual_result}'
+      context.app.cart_page.verify_cart_empty_message()
+sleep(6)
