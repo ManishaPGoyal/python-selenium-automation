@@ -85,9 +85,41 @@ Scenario: User can search for tea
    Given Open target main page
    When  Search the product tea
    Then  Verify that the correct search result shown for tea
+   #lesson 7
+   Then  Verify product tea in URL
 
 #PART2
 Scenario: User can see empty cart message
     Given Open target main page
     When  Click on the cart icon
     Then  Verify that "Your cart is empty" message is shown
+
+
+#Lesson 7 homework
+#part 1
+#1. Update the test case to verify that logged out user can access Sign In, add Page Object pattern:
+#Open target.com  # main page
+#Click Sign In  # header
+#From right side navigation menu, click Sign In # header or create PO for menu
+#Verify Sign In form opened # sign in page
+
+Scenario: Logged out user can navigate to Sign In page
+    Given Open target main page
+    When  Click on the Sign In
+    When  Click Sign In from right navigation menu
+    Then  Verify that Sign In form opened
+
+
+#part 2
+#2. Update “Add a product to cart” scenario, add Page Object pattern.
+
+Scenario: User can add Target product in cart and check it's in the cart
+    # Enter steps here
+   Given Open target main page
+   #When  Search the Target product to Add to cart
+   When Search the product mug
+   And Click on the Add to Cart Button
+   And Store the product name
+   And Confirm the Add to Cart button from side navigation
+   And Open the cart page
+   Then Verify that the cart has that product
