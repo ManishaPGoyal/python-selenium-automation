@@ -71,3 +71,20 @@ class Page:
             EC.invisibility_of_element(locator),
             message=f'Element by {locator} is not invisible,still shown on page'
         )
+
+    def get_current_window(self ):
+        return self.driver.current_window_handle
+
+    def switch_to_new_window(self):
+        self.wait.until(EC.new_window_is_opened)
+        all_windows=self.driver.window_handles
+        print(f'Switching to windows{all_windows[1]}')
+        self.driver.switch_to.window(all_windows[1])
+
+    def switch_to_window_by_id(self,window_id):
+        print(f'Switching window {window_id}')
+        self.driver.switch_to.window(window_id)
+        print(f'Switching window {window_id}')
+
+    def close(self):
+        self.driver.close()
