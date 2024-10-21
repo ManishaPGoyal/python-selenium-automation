@@ -9,3 +9,6 @@ class SignInPage(Page):
                   'ui-default&back_button_action=browser&keep_me_signed_in=true&kmsi_default=false&actions=create_session_signin')
 
 
+    # #Homework 8 part 1
+    # def sign_in_page(self):
+    #     self.open('https://www.target.com/login')

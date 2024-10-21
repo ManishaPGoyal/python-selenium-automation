@@ -123,3 +123,30 @@ Scenario: User can add Target product in cart and check it's in the cart
    And Confirm the Add to Cart button from side navigation
    And Open the cart page
    Then Verify that the cart has that product
+
+
+#lesson 9 practice ActionChains
+Scenario: User can see favorites tooltip for search results
+  Given  Open target main page
+  When   Search for tea
+  And    Hover favorites icon
+  #Then   favorites tooltip is shown
+
+#getting error
+
+#Step failed:  <when "Hover favorites icon">
+#
+#Traceback (most recent call last):
+#  File "C:\Users\parve\OneDrive\Desktop\python-selenium-automation\venv\Lib\site-packages\behave\model.py", line 1329, in run
+#    match.run(runner.context)
+#  File "C:\Users\parve\OneDrive\Desktop\python-selenium-automation\venv\Lib\site-packages\behave\matchers.py", line 98, in run
+#    self.func(context, *args, **kwargs)
+#  File "features\steps\target_steps.py", line 232, in hover_favorites
+#    context.app.search_result_page.hover_favorites()
+#  File "C:\Users\parve\OneDrive\Desktop\python-selenium-automation\pages\search_result_page.py", line 41, in hover_favorites
+#    actions.move_to_element(heart_icon)
+#  File "C:\Users\parve\OneDrive\Desktop\python-selenium-automation\venv\Lib\site-packages\selenium\webdriver\common\action_chains.py", line 253, in move_to_element
+#    self.w3c_actions.pointer_action.move_to(to_element)
+#  File "C:\Users\parve\OneDrive\Desktop\python-selenium-automation\venv\Lib\site-packages\selenium\webdriver\common\actions\pointer_actions.py", line 88, in move_to
+#    raise AttributeError("move_to requires a WebElement")
+#AttributeError: move_to requires a WebElement

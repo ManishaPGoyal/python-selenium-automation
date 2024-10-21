@@ -53,7 +53,7 @@ def search_product(context,item):
     # Search button=> click
     # command type on console $x("//button[@data-test='@web/Search/SearchButton']")
     context.driver.find_element(By.XPATH, "//button[@data-test='@web/Search/SearchButton']").click()
-    sleep(5)
+    sleep(8)
 
 
 @then('Verify that correct search result shown for {product}')
@@ -61,6 +61,7 @@ def verify_result1(context,product):
     # Verification  $x("//div[@data-test='resultsHeading']")
     actual_result = context.driver.find_element(By.XPATH, "//div[@data-test='resultsHeading']").text
     #expected_result = product
+    sleep(2)
     assert product in actual_result, f'Expected {product} but got {actual_result}'
 
 #one way
@@ -222,3 +223,16 @@ def verify_cart(context):
     # assert context.product_name in actual_name,f"Expected{context.product_name} but got {actual_name}"
     context.app.product_page.verify_product()
     sleep(5)
+
+#lesson 9 practice
+@when('Hover favorites icon')
+def hover_favorites(context):
+    #pass
+    sleep(4)
+    context.app.search_result_page.hover_favorites()
+
+
+@then('favorites tooltip is shown')
+def verify_favorites(context):
+    #pass
+    context.app.search_result_page.verify_favorites()
